@@ -1,0 +1,59 @@
+{
+  "name": "kopi-mug",
+  "version": "0.1.0",
+  "private": false,
+  "main": "index.js",
+  "author": "Yee Hui Poh <yhpoh91@gmail.com>",
+  "files": [
+    "/dist",
+    "/README.md"
+  ],
+  "dependencies": {
+    "axios": "^0.18.0",
+    "moment": "^2.24.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-flow": "^7.9.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^24.1.0",
+    "babel-preset-minify": "^0.5.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-flowtype": "^4.7.0",
+    "eslint-plugin-import": "^2.16.0",
+    "esm": "^3.2.25",
+    "flow-bin": "^0.124.0",
+    "jest": "^24.1.0",
+    "mocha": "^6.0.1",
+    "nodemon": "^1.18.10",
+    "regenerator-runtime": "^0.13.2",
+    "sequelize-cli": "^5.5.1"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "flow": "flow",
+    "cleanDev": "rm -rf build && mkdir build",
+    "cleanDist": "rm -rf dist && mkdir dist",
+    "clean": "npm run cleanDev && npm run cleanDist",
+    "buildDev": "npm run cleanDev && babel src -D -d build",
+    "buildDist": "npm run cleanDist && babel build --presets minify -D -d dist",
+    "build": "npm run buildDev && npm run buildDist",
+    "publish": "npm run build && npm publish",
+    "testDev": "TEST_ENV=dev mocha \"./{,!(node_modules)/**/}*.test.js\" --require esm",
+    "testDist": "TEST_ENV=dist mocha \"./{,!(node_modules)/**/}*.test.js\" --require esm",
+    "testFullDev": "npm run buildDev && npm run testDev",
+    "testFullDist": "npm run buildDist && npm run testDist",
+    "pretest": "npm run build",
+    "test": "npm run testDist"
+  }
+}
